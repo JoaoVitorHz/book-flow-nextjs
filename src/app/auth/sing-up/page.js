@@ -37,7 +37,7 @@ export default function SingUp(props){
                 setIsSingUpError(false)
                 setMensageStatus('Conta criada com sucesso!')
                 setShowCardError(true)
-               
+               router.push('/')
             }
        
         } catch(error){
