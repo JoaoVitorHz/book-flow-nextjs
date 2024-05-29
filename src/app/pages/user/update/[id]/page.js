@@ -42,7 +42,7 @@ export default function UpdateUser({ params }, props){
                 setIsSingUpError(false)
                 setMensageStatus('Usuario atualizado com sucesso!')
                 setShowCardError(true)
-               
+                router.push('/pages/user/list')
             }
        
         } catch(error){

@@ -37,7 +37,7 @@ export default function CreateUser(props){
                 setIsSingUpError(false)
                 setMensageStatus('Conta criada com sucesso!')
                 setShowCardError(true)
-               
+                router.push('/pages/user/list')
             }
        
         } catch(error){

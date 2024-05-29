@@ -11,7 +11,10 @@ export default function Menu(){
     const router = useRouter();
     return(
         <div className="min-w-[250px] h-screen border border-gray-200/20 p-5">
-            <div className="flex gap-3 items-center mb-10">
+            <div 
+                className="flex gap-3 items-center mb-10"
+                onClick={() => router.push('/pages')}
+            >
                 <MdMenuBook className="text-3xl text-green-400"/>
                 <h1 className="font-bold">Book Flow</h1>
             </div>

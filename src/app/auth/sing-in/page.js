@@ -32,7 +32,6 @@ export default function SingIn(){
                 ...data
             })
             if(response.data.id){
-                localStorage.setItem('userId', response.data.id)
                 setIsError(false)
                 setShowError(true)
                 setErrorMenssage('Login feito com sucesso')

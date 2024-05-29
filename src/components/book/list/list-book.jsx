@@ -40,7 +40,7 @@ export default function ListBooks(props){
                         <TableCell  className="text-center">{book.synopsis == null ? '-' : book.synopsis }</TableCell>
                         <TableCell  className="text-center">{book.author == null ? '-' : book.author }</TableCell>
                         <TableCell  className="text-center">{book.publisher == null ? '-' : book.publisher.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4') }</TableCell>
-                        <TableCell  className="text-center">{book.price == null ? '-' : book.price.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3') }</TableCell>
+                        <TableCell  className="text-center">{book.price == null ? '-' : parseInt(book.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }</TableCell>
                         <TableCell  className="flex itens-center gap-5 text-center">
                             <HiOutlinePencilAlt  
                                 className="text-xl cursor-pointer hover:text-green-400 transition-[300ms]" 
