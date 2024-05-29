@@ -14,6 +14,11 @@ export default function ListUser(){
         setDataUser(response.data)
     }
 
+    async function DeleteUser(userId){
+        await api.delete('user/' + userId)
+        GetAllUser();
+    }
+
     function FilterUser(userName){
         setDataUser( dataUser.filter(user => patient.name.includes(userName) ))
     }
@@ -28,8 +33,9 @@ export default function ListUser(){
                 <h1 className="text-4xl font-bold text-green-400">Usuarios Cadastrados</h1>
                 <span>Abaixo temos uma lista com todos os usuario cadastrados no sistema</span>
             </div>
-            <div>
+            <div className="border border-gray-200 p-5 rounded-md">
                 <ListUsers
+                    deleteUser={(userID) => DeleteUser(userID)}
                     dataUser={dataUser}
                 />
             </div>

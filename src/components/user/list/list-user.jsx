@@ -18,8 +18,7 @@ import { useRouter } from "next/navigation";
 export default function ListUsers(props){
     const router = useRouter();
     return(
-        <Table className="rounded w-[100%] m-auto">
-            <TableCaption>Uma listagem de usuarios.</TableCaption>
+        <Table className=" w-[100%] m-auto">
             <TableHeader>
                 <TableRow>
                     <TableHead  className="text-center text-white">Nome</TableHead>
@@ -38,7 +37,6 @@ export default function ListUsers(props){
                                 <IoPersonSharp className="text-green-400"/>
                                 <span>{user.name}</span>
                         </TableCell>
-                        <TableCell  className="text-center">{user.name == null ? '-' : user.name }</TableCell>
                         <TableCell  className="text-center">{user.last_name == null ? '-' : user.last_name }</TableCell>
                         <TableCell  className="text-center">{user.email == null ? '-' : user.email }</TableCell>
                         <TableCell  className="text-center">{user.cpf == null ? '-' : user.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4') }</TableCell>
@@ -50,7 +48,7 @@ export default function ListUsers(props){
                             />
                             <FaRegTrashCan 
                                 className="text-xl cursor-pointer hover:text-green-400 transition-[300ms]" 
-                                // onClick={() => router.push(user)}
+                                    onClick={() => props.deleteUser(user.id)}
                                 />
                         </TableCell>
                     </TableRow>

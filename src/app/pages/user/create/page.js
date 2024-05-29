@@ -61,8 +61,8 @@ export default function CreateUser(props){
                 onSubmit={handleSubmit(CreateUser)}
             > 
                 <div className="w-full ">
-                    <h1 className="text-2xl font-bold">Criar usuario</h1>
-                    <span className="text-sm text-white">Insira os dadso abaixo para criar um usuario</span>
+                    <h1 className="text-2xl text-green-400 font-bold">Criar Usuario</h1>
+                    <span className="text-sm text-white">Insira os dados abaixo para criar um usuario</span>
                 </div>
                 {showCardError &&
                     <div className={`w-full flex justify-center p-3 rounded text-white ${isSingUpError ? 'bg-red-600 ': 'bg-green-600'}`}>
@@ -105,7 +105,7 @@ export default function CreateUser(props){
                 </div>
                 
                 <div className="w-full flex justify-center ">
-                    <button className=" w-full bg-white text-black px-5 py-2 rounded pointer">Criar conta</button>
+                    <button className=" w-full bg-white text-black px-5 py-2 rounded pointer hover:bg-green-200 transition-[300ms]">Criar conta</button>
                 </div>
             </form>
         </section>

@@ -1,9 +1,14 @@
+'use client'
+
 import { MdMenuBook } from "react-icons/md";
 import { FiUser } from "react-icons/fi";
 import { MdOutlineLibraryBooks } from "react-icons/md";
 import { LuFileBarChart2 } from "react-icons/lu";
 
+import { useRouter } from "next/navigation";
+
 export default function Menu(){
+    const router = useRouter();
     return(
         <div className="min-w-[250px] h-screen border border-gray-200/20 p-5">
             <div className="flex gap-3 items-center mb-10">
@@ -17,17 +22,19 @@ export default function Menu(){
                     before:content-[''] before:block before:flex-1 before:bg-gray-200/100 before:h-[1px]">
                     <span className=" text-sm ">Gerenciar Usuario</span>
                 </div>
-                <div className="flex gap-3 items-center hover:bg-gray-300/20 px-3 py-2 rounded-md cursor-pointer">
+                <div 
+                    className="flex gap-3 items-center hover:bg-gray-300/20 px-3 py-2 rounded-md cursor-pointer"
+                    onClick={() => router.push('/pages/user/list')}
+                >
                     <FiUser  className="text-xl text-white"/>
                     <h1 className="text-gray-300">Ver Usuarios</h1>
                 </div>
-                <div className="flex gap-3 items-center hover:bg-gray-300/20 px-3 py-2 rounded-md cursor-pointer">
+                <div 
+                    className="flex gap-3 items-center hover:bg-gray-300/20 px-3 py-2 rounded-md cursor-pointer"
+                    onClick={() => router.push('/pages/user/create')}
+                >
                     <FiUser  className="text-xl text-white"/>
                     <h1  className="text-gray-300">Criar Usuario</h1>
-                </div>
-                <div className="flex gap-3 items-center hover:bg-gray-300/20 px-3 py-2 rounded-md cursor-pointer">
-                    <FiUser  className="text-xl text-white"/>
-                    <h1  className="text-gray-300">Atualizar Usuario</h1>
                 </div>
             </div>
 
@@ -38,17 +45,19 @@ export default function Menu(){
                     before:content-[''] before:block before:flex-1 before:bg-gray-200/100 before:h-[1px]">
                     <span className=" text-sm ">Gerenciar Livros</span>
                 </div>
-                <div className="flex gap-3 items-center hover:bg-gray-300/20 px-3 py-2 rounded-md cursor-pointer">
+                <div 
+                    className="flex gap-3 items-center hover:bg-gray-300/20 px-3 py-2 rounded-md cursor-pointer"
+                    onClick={() => router.push('/pages/book/list')}
+                >
                     <MdOutlineLibraryBooks   className="text-xl text-white"/>
                     <h1 className="text-gray-300">Ver Livros</h1>
                 </div>
-                <div className="flex gap-3 items-center hover:bg-gray-300/20 px-3 py-2 rounded-md cursor-pointer">
+                <div 
+                    className="flex gap-3 items-center hover:bg-gray-300/20 px-3 py-2 rounded-md cursor-pointer"
+                    onClick={() => router.push('/pages/book/create')}
+                >
                     <MdOutlineLibraryBooks   className="text-xl text-white"/>
                     <h1  className="text-gray-300">Criar Livro</h1>
-                </div>
-                <div className="flex gap-3 items-center hover:bg-gray-300/20 px-3 py-2 rounded-md cursor-pointer">
-                    <MdOutlineLibraryBooks   className="text-xl text-white"/>
-                    <h1  className="text-gray-300">Atualizar Livro</h1>
                 </div>
             </div>
 
@@ -59,7 +68,10 @@ export default function Menu(){
                     before:content-[''] before:block before:flex-1 before:bg-gray-200/100 before:h-[1px]">
                     <span className=" text-sm ">Vendas</span>
                 </div>
-                <div className="flex gap-3 items-center hover:bg-gray-300/20 px-3 py-2 rounded-md cursor-pointer">
+                <div 
+                    className="flex gap-3 items-center hover:bg-gray-300/20 px-3 py-2 rounded-md cursor-pointer"
+                    onClick={() => router.push('/pages/user/update')}
+                >
                     <LuFileBarChart2   className="text-xl text-white"/>
                     <h1 className="text-gray-300">Ver Vendas</h1>
                 </div>
