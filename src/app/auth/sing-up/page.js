@@ -1,0 +1,99 @@
+'use client'
+
+import { z } from "zod";
+import { useForm } from "react-hook-form"
+import { zodResolver } from '@hookform/resolvers/zod'
+
+import { api } from "@/service/api"
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+
+import Input from "@/components/Input";
+
+const RegisterFormSchema = z.object({
+    name: z.string({ required_error: "Nome é obrigatorio"}).min(3, 'O nome deve conter pelo menos 3 letras').regex(/^\D+$/,'O nome não pode conter números' ),
+    email: z.string({ required_error: "Email é obrigatorio"}).email('Email invalido'),
+    password: z.string({ required_error: "Senha é obrigatorio"}).min(6, 'Senha deve ter pelo menos 6 caracteres'),
+})
+
+export default function SingUp(props){
+    const { register, control, handleSubmit, formState: { errors } } = useForm({resolver: zodResolver(RegisterFormSchema)});
+    const router = useRouter()
+
+    const [isSingUpError, setIsSingUpError] = useState(false)
+    const [showCardError, setShowCardError] = useState(false)
+    const [mensageStatusSingUp, setMensageStatus] = useState('');
+
+    async function CreateUser(data){
+        console.log(data)
+        try{
+            const response = await api.post('user/create', {
+                ...data, dateBirth
+            })
+            if(response.data.id){
+                setIsSingUpError(false)
+                setMensageStatus('Conta criada com sucesso!')
+                setShowCardError(true)
+                props.updateListPatient()
+            }
+       
+        } catch(error){
+            if(error){
+                setIsSingUpError(true)
+                setMensageStatus(error.response.data.errors)
+                setShowCardError(true)
+
+                setTimeout(() => {
+                    setMensageStatus('')
+                    setShowCardError(false)
+                }, 5000)
+            }
+        }
+    }
+
+    return(
+        <section className="w-screen h-screen flex justify-center items-center">
+            <form 
+                className="min-w-[500px] rounded-md border border-gray-100/20 p-5 flex flex-col gap-5"
+                onSubmit={handleSubmit(CreateUser)}
+            > 
+                <div className="w-full ">
+                    <h1 className="text-2xl font-bold">Criar conta</h1>
+                    <span className="text-sm text-white">Insira seus dados pessoais para criar uma conta</span>
+                </div>
+                {showCardError &&
+                    <div className={`w-full flex justify-center p-3 rounded text-white ${isSingUpError ? 'bg-softPink ': 'bg-green-600'}`}>
+                        <span>{mensageStatusSingUp}</span>
+                    </div>
+                }
+                <div className="w-full flex flex-col gap-5">
+                    <Input 
+                        control={control}
+                        name="name"
+                        inputTitle="Nome"
+                    />
+                    <Input 
+                        control={control}
+                        name="email"
+                        inputTitle="E-mail"
+                    />
+                    <Input 
+                        control={control}
+                        name="password"
+                        inputTitle="Senha"
+                    />
+                </div>
+                
+                <div className="w-full flex justify-center ">
+                    <button className=" w-full bg-white text-black px-5 py-2 rounded pointer">Criar conta</button>
+                </div>
+
+                <div className="w-full flex flex-col items-center">
+                    <span className="text-xs mb-3 uppercase font-semibold">Já tem conta? Faça Login!</span>
+                
+                    <button className="w-full bg-black border border-gray-500 px-5 py-2 rounded pointer">Fazer Login</button>
+                </div>
+            </form>
+        </section>
+    )
+}
