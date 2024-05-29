@@ -36,7 +36,7 @@ export default function SingIn(){
                 setIsError(false)
                 setShowError(true)
                 setErrorMenssage('Login feito com sucesso')
-                router.push('/pages/panel')
+                // router.push('/pages/panel')
             }
         } catch(error){
             if(error){

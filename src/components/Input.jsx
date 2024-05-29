@@ -23,7 +23,7 @@ export default function Input(props){
                     {...field}
                     mask={props.mask}
                     onChange={handleChange} // Use handleChange para remover o caractere '_' antes de passar o valor para o campo do formulário
-                    className="w-[320px] border rounded-sm p-3"
+                    className="w-full bg-transparent border border-gray-100/20  rounded-sm p-3"
                 />
             ) : (
                 <input 

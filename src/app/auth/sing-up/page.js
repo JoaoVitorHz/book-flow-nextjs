@@ -12,8 +12,11 @@ import Input from "@/components/Input";
 
 const RegisterFormSchema = z.object({
     name: z.string({ required_error: "Nome é obrigatorio"}).min(3, 'O nome deve conter pelo menos 3 letras').regex(/^\D+$/,'O nome não pode conter números' ),
+    last_name: z.string({ required_error: "Sobrenome é obrigatorio"}).min(3, 'O sobrenome deve conter pelo menos 3 letras').regex(/^\D+$/,'O sobrenome não pode conter números' ),
     email: z.string({ required_error: "Email é obrigatorio"}).email('Email invalido'),
     password: z.string({ required_error: "Senha é obrigatorio"}).min(6, 'Senha deve ter pelo menos 6 caracteres'),
+    phone: z.string({ required_error: "Celular do paciente é obrigatorio"}).min(11, 'O telefone celular deve ter no mínimo 11 dígitos.'),
+    cpf: z.string().min(11, 'O CPF deve ter no mínimo 11 dígitos.'),
 })
 
 export default function SingUp(props){
@@ -28,13 +31,13 @@ export default function SingUp(props){
         console.log(data)
         try{
             const response = await api.post('user/create', {
-                ...data, dateBirth
+                ...data, user_type: 1
             })
             if(response.data.id){
                 setIsSingUpError(false)
                 setMensageStatus('Conta criada com sucesso!')
                 setShowCardError(true)
-                props.updateListPatient()
+               
             }
        
         } catch(error){
@@ -62,7 +65,7 @@ export default function SingUp(props){
                     <span className="text-sm text-white">Insira seus dados pessoais para criar uma conta</span>
                 </div>
                 {showCardError &&
-                    <div className={`w-full flex justify-center p-3 rounded text-white ${isSingUpError ? 'bg-softPink ': 'bg-green-600'}`}>
+                    <div className={`w-full flex justify-center p-3 rounded text-white ${isSingUpError ? 'bg-red-600 ': 'bg-green-600'}`}>
                         <span>{mensageStatusSingUp}</span>
                     </div>
                 }
@@ -74,6 +77,11 @@ export default function SingUp(props){
                     />
                     <Input 
                         control={control}
+                        name="last_name"
+                        inputTitle="Sobrenome"
+                    />
+                    <Input 
+                        control={control}
                         name="email"
                         inputTitle="E-mail"
                     />
@@ -81,6 +89,18 @@ export default function SingUp(props){
                         control={control}
                         name="password"
                         inputTitle="Senha"
+                    />
+                    <Input 
+                        control={control}
+                        name="phone"
+                        inputTitle="Telefone"
+                        mask="(99) 99999-9999"
+                    />
+                    <Input 
+                        control={control}
+                        name="cpf"
+                        mask="999.999.999-99"
+                        inputTitle="cpf"
                     />
                 </div>
                 
@@ -91,7 +111,12 @@ export default function SingUp(props){
                 <div className="w-full flex flex-col items-center">
                     <span className="text-xs mb-3 uppercase font-semibold">Já tem conta? Faça Login!</span>
                 
-                    <button className="w-full bg-black border border-gray-500 px-5 py-2 rounded pointer">Fazer Login</button>
+                    <button 
+                        className="w-full bg-black border border-gray-500 px-5 py-2 rounded pointer"
+                        onClick={() => router.push('/')}
+                    >
+                        Fazer Login
+                    </button>
                 </div>
             </form>
         </section>
